@@ -1,6 +1,5 @@
 // Load tasks from local storage when the page loads
 window.addEventListener('load', function () {
-    // this.localStorage.removeItem('Previously');
     var savedTasksToday = localStorage.getItem('tasksToday');
     if (savedTasksToday) {
         document.getElementById('sentenceListToday').innerHTML = savedTasksToday;
@@ -16,18 +15,12 @@ window.addEventListener('load', function () {
         document.getElementById('sentenceListPreviously').innerHTML = savedTasksPreviously;
     }
 
-    // Remove existing clear buttons before adding new ones
     document.querySelectorAll('.sentence-container button').forEach(button => button.remove());
 
-    // Add clear buttons to loaded tasks
-
-
-    // Check if 24 hours have passed since the tasks were saved
     var lastSaveTime = localStorage.getItem('lastSaveTime');
     if (lastSaveTime && Date.now() - parseInt(lastSaveTime) >= 24 * 60 * 60 * 1000) {
         moveTasksToPreviously();
     } else {
-        // Set a timer for the remaining time until 24 hours
         setTimeout(moveTasksToPreviously, 24 * 60 * 60 * 1000 - (Date.now() - parseInt(lastSaveTime)));
     }
 
@@ -36,30 +29,30 @@ window.addEventListener('load', function () {
 });
 
 document.getElementById("todaylink").addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default behavior of link click
+    event.preventDefault();
     document.getElementById("details").style.display = "none";
     document.getElementById("today").style.display = "block";
     document.getElementById("tomorrow").style.display = "none";
     document.getElementById("previously").style.display = "none";
-    document.getElementById("clearAll").style.display = "inline-block"; // Show the Clear All button
+    document.getElementById("clearAll").style.display = "inline-block"; 
 });
 
 document.getElementById("tomorrowlink").addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default behavior of link click
+    event.preventDefault();
     document.getElementById("details").style.display = "none";
     document.getElementById("today").style.display = "none";
     document.getElementById("tomorrow").style.display = "block";
     document.getElementById("previously").style.display = "none";
-    document.getElementById("clearAll").style.display = "inline-block"; // Show the Clear All button
+    document.getElementById("clearAll").style.display = "inline-block";
 });
 
 document.getElementById("yesterday").addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default behavior of link click
+    event.preventDefault();
     document.getElementById("details").style.display = "none";
     document.getElementById("today").style.display = "none";
     document.getElementById("tomorrow").style.display = "none";
     document.getElementById("previously").style.display = "block";
-    document.getElementById("clearAll").style.display = "none"; // Hide the Clear All button
+    document.getElementById("clearAll").style.display = "none";
 });
 
 
@@ -75,41 +68,36 @@ function moveTasksToPreviously() {
         }
         localStorage.setItem('Previously', previouslyTasks);
         localStorage.removeItem('tasksToday');
-        localStorage.removeItem('lastSaveTime'); // Remove last save time
+        localStorage.removeItem('lastSaveTime');
         document.getElementById('sentenceListToday').innerHTML = "";
-        document.getElementById('sentenceListPreviously').innerHTML = previouslyTasks; // Show previously tasks on page
+        document.getElementById('sentenceListPreviously').innerHTML = previouslyTasks;
     }
 }
 
 // Function to clear all tasks and local storage
 function clearAllTasks() {
-    // Clear tasks from the webpage
     document.getElementById('sentenceListToday').innerHTML = "";
     document.getElementById('sentenceListTomorrow').innerHTML = "";
 
-    // Move today's tasks to previously if any
     moveTasksToPreviously();
-
-    // Clear tasks from local storage
     localStorage.removeItem('tasksTomorrow');
 }
 
 document.getElementById("addSentenceToday").addEventListener("click", function () {
     var sentence = document.getElementById("taskInputToday").value.trim();
     if (sentence !== "") {
-        var sentenceNode = document.createElement("p"); // Create a paragraph element
-        sentenceNode.textContent = sentence; // Set the text content of the paragraph
-        var sentenceContainer = document.createElement("div"); // Create a div to contain the sentence and clear button
-        sentenceContainer.classList.add("sentence-container"); // Add class for styling
-        sentenceContainer.appendChild(sentenceNode); // Append the paragraph element to the container
-        addClearButton(sentenceContainer, 'today'); // Add the clear button
+        var sentenceNode = document.createElement("p");
+        sentenceNode.textContent = sentence;
+        var sentenceContainer = document.createElement("div");
+        sentenceContainer.classList.add("sentence-container");
+        sentenceContainer.appendChild(sentenceNode);
+        addClearButton(sentenceContainer, 'today');
         var sentenceListToday = document.getElementById("sentenceListToday");
-        sentenceListToday.appendChild(sentenceContainer); // Append the container to the sentence list
+        sentenceListToday.appendChild(sentenceContainer);
 
-        // Save tasks for today to local storage
         var tasksToday = localStorage.getItem('tasksToday');
         if (tasksToday) {
-            tasksToday += sentenceContainer.outerHTML; // Save the entire HTML of the container
+            tasksToday += sentenceContainer.outerHTML;
         } else {
             tasksToday = sentenceContainer.outerHTML;
         }
@@ -121,15 +109,14 @@ document.getElementById("addSentenceToday").addEventListener("click", function (
 document.getElementById("addSentenceTomorrow").addEventListener("click", function () {
     var sentence = document.getElementById("taskInputTomorrow").value.trim();
     if (sentence !== "") {
-        var sentenceNode = document.createElement("p"); // Create a paragraph element
-        sentenceNode.textContent = sentence; // Set the text content of the paragraph
-        var sentenceContainer = document.createElement("div"); // Create a div to contain the sentence and clear button
-        sentenceContainer.classList.add("sentence-container"); // Add class for styling
-        sentenceContainer.appendChild(sentenceNode); // Append the paragraph element to the container
+        var sentenceNode = document.createElement("p");
+        sentenceNode.textContent = sentence;
+        var sentenceContainer = document.createElement("div");
+        sentenceContainer.classList.add("sentence-container"); 
+        sentenceContainer.appendChild(sentenceNode);
         var sentenceListTomorrow = document.getElementById("sentenceListTomorrow");
-        sentenceListTomorrow.appendChild(sentenceContainer); // Append the container to the sentence list
+        sentenceListTomorrow.appendChild(sentenceContainer);
 
-        // Save task for tomorrow to local storage
         var tasksTomorrow = localStorage.getItem('tasksTomorrow');
         if (tasksTomorrow) {
             tasksTomorrow += sentenceContainer.outerHTML;
@@ -138,7 +125,6 @@ document.getElementById("addSentenceTomorrow").addEventListener("click", functio
         }
         localStorage.setItem('tasksTomorrow', tasksTomorrow);
 
-        // Add clear button only when a new sentence is added
         addClearButton(sentenceContainer, 'tomorrow');
     }
 });
@@ -149,15 +135,14 @@ function addClearButton(sentenceContainer, containerId) {
     var clearButton = document.createElement("button");
     clearButton.textContent = "Clear";
     clearButton.addEventListener("click", function () {
-        sentenceContainer.parentNode.removeChild(sentenceContainer); // Remove the sentence element
-        // Save updated tasks to local storage
+        sentenceContainer.parentNode.removeChild(sentenceContainer);
         if (containerId === "today") {
             localStorage.setItem('tasksToday', document.getElementById("sentenceListToday").innerHTML);
         } else {
             localStorage.setItem('tasksTomorrow', document.getElementById("sentenceListTomorrow").innerHTML);
         }
     });
-    sentenceContainer.appendChild(clearButton); // Append the clear button
+    sentenceContainer.appendChild(clearButton);
 }
 
 // Function to add clear buttons to loaded tasks
