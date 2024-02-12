@@ -95,7 +95,7 @@ header:hover {
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-image: url(../images/photo.png);
+    background-image: url(photo.png);
     font-size: 25px;
     color: #ffffff;
     background-repeat: no-repeat;
