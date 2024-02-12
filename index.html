@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do WebPage</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Additional CSS for positioning clear buttons */
         .sentence-container {
             display: flex;
             align-items: center;
@@ -17,12 +16,10 @@
 
         .sentence-container button {
             margin-left: 10px;
-            /* Adjust the margin as needed */
         }
 
         #clearAll {
             display: none;
-            /* Hide the Clear All button by default */
         }
     </style>
 </head>
@@ -54,22 +51,22 @@
             <h2>Today's Tasks</h2>
             <textarea id="taskInputToday" placeholder="Write your tasks for today here..."></textarea>
             <button id="addSentenceToday">Add Sentence</button>
-            <div id="sentenceListToday"></div> <!-- Container for displaying sentences -->
+            <div id="sentenceListToday"></div>
         </div>
         <div id="tomorrow" style="display: none;">
             <h2>Tomorrow's Tasks</h2>
             <textarea id="taskInputTomorrow" placeholder="Write your tasks for tomorrow here..."></textarea>
             <button id="addSentenceTomorrow">Add Sentence</button>
-            <div id="sentenceListTomorrow"></div> <!-- Container for displaying sentences -->
+            <div id="sentenceListTomorrow"></div>
         </div>
         <div id="previously" style="display: none;">
             <h2 id="prev-details">Previously</h2>
-            <div id="sentenceListPreviously"></div> <!-- Container for displaying previously stored tasks -->
+            <div id="sentenceListPreviously"></div>
         </div>
-        <button id="clearAll">Clear All</button> <!--Button to clear all tasks-->
+        <button id="clearAll">Clear All</button>
     </div>
 
-    <script src="./js/script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
