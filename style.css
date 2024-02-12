@@ -21,7 +21,7 @@
 header {
     display: flex;
     justify-content: center;
-    margin-top: 12px;
+/*     margin-top: 12px; */
     height: 4.2rem;
     align-items: center;
     background: linear-gradient(#00bcd4, #e91e63, #3f51b5, #00bcd4);
@@ -95,7 +95,7 @@ header:hover {
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-image: url(photo.png);
+    background-image: url(todo.png);
     font-size: 25px;
     color: #ffffff;
     background-repeat: no-repeat;
