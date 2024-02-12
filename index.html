@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do WebPage</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Additional CSS for positioning clear buttons */
+        .sentence-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .sentence-container button {
+            margin-left: 10px;
+            /* Adjust the margin as needed */
+        }
+
+        #clearAll {
+            display: none;
+            /* Hide the Clear All button by default */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header id="navbar">
+            <h2>Welcome to To Do WebPage!</h2>
+        </header>
+        <div id="sideSection">
+            <ul id="unorderlist">
+                <li><a id="todaylink" href="#">Today</a></li>
+                <li><a id="tomorrowlink" href="#">Tomorrow</a></li>
+                <li><a id="yesterday" href="#">Previously</a></li>
+            </ul>
+        </div>
+        <div id="details">
+            <h2 id="det">Details</h2>
+            <p id="paragraph"
+                style="height: 40rem;display: flex;justify-content: center;align-items: center;width: 60%;margin-left: 11%;">
+                To Do WebPage is made to help you achieve your daily goals with ease. To Do
+                WebPage allows you to keep track of your day and complete small to big tasks on time, which keeps you
+                ahead of your competitors and makes you feel active and in control of your day. To Start Click on
+                Today section and start writing down your today's activity which is to be
+                done!
+            </p>
+        </div>
+        <div id="today" style="display: none;">
+            <h2>Today's Tasks</h2>
+            <textarea id="taskInputToday" placeholder="Write your tasks for today here..."></textarea>
+            <button id="addSentenceToday">Add Sentence</button>
+            <div id="sentenceListToday"></div> <!-- Container for displaying sentences -->
+        </div>
+        <div id="tomorrow" style="display: none;">
+            <h2>Tomorrow's Tasks</h2>
+            <textarea id="taskInputTomorrow" placeholder="Write your tasks for tomorrow here..."></textarea>
+            <button id="addSentenceTomorrow">Add Sentence</button>
+            <div id="sentenceListTomorrow"></div> <!-- Container for displaying sentences -->
+        </div>
+        <div id="previously" style="display: none;">
+            <h2 id="prev-details">Previously</h2>
+            <div id="sentenceListPreviously"></div> <!-- Container for displaying previously stored tasks -->
+        </div>
+        <button id="clearAll">Clear All</button> <!--Button to clear all tasks-->
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
